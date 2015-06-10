@@ -3,17 +3,19 @@
 # Rafal Szyja (Raf/Vulture Design), June 2015
 
 import os
+import remotevice
 
 notes = ['C-', 'C#', 'D-', 'D#', 'E-', 'F-', 'F#', 'G-', 'G#', 'A-', 'A#', 'B-']
 hexval = []
-basicduration = 5
+basicduration = 4
+transpose = -24
 
 def storehex(value):
     hexval.append(value)
     #print hex(value)
     pass
 
-with open("x.txt") as f:
+with open("michu1.txt") as f:
     data = f.readlines()
 
     dur = 0
@@ -39,7 +41,7 @@ with open("x.txt") as f:
 
         halftone = notes.index(note[:2])
         octave = int(note[2:3])
-        notetohex = octave * 12 + halftone
+        notetohex = octave * 12 + halftone + transpose
 
         storehex(notetohex)
 
@@ -49,6 +51,7 @@ for v in hexval:
     monitorstring = monitorstring + " %02.X" % (v)
 
 print "> 7000" + monitorstring + " ff"
+remotevice.sendCommand("> 7000" + monitorstring + " ff \n")
 
 
 
