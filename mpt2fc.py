@@ -7,15 +7,17 @@ import remotevice
 
 notes = ['C-', 'C#', 'D-', 'D#', 'E-', 'F-', 'F#', 'G-', 'G#', 'A-', 'A#', 'B-']
 hexval = []
+# PARAMTERS
 basicduration = 4
-transpose = -24
+transpose = -12
+destpattern = 2
 
 def storehex(value):
     hexval.append(value)
     #print hex(value)
     pass
 
-with open("michu1.txt") as f:
+with open("michu3.txt") as f:
     data = f.readlines()
 
     dur = 0
@@ -50,8 +52,8 @@ monitorstring = ""
 for v in hexval:
     monitorstring = monitorstring + " %02.X" % (v)
 
-print "> 7000" + monitorstring + " ff"
-remotevice.sendCommand("> 7000" + monitorstring + " ff \n")
+print "> 7" + str(destpattern) +"00" + monitorstring + " ff"
+remotevice.sendCommand("> 7" + str(destpattern) +"00" + monitorstring + " ff \n")
 
 
 
